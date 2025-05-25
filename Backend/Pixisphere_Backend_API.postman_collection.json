@@ -1,0 +1,239 @@
+{
+  "info": {
+    "name": "Pixisphere Backend API",
+    "_postman_id": "pixisphere-backend-api",
+    "description": "Postman collection to test all routes of Pixisphere backend assignment",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Signup (Client)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/auth/signup"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"client1@example.com\",\n  \"password\": \"123456\",\n  \"role\": \"client\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Signup (Partner)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/auth/signup"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"partner1@example.com\",\n  \"password\": \"123456\",\n  \"role\": \"partner\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/auth/login"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"partner1@example.com\",\n  \"password\": \"123456\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Partner",
+      "item": [
+        {
+          "name": "Onboard Partner",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/partner/onboard"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"phone\": \"1234567890\",\n  \"address\": \"Main Street\",\n  \"city\": \"Dehradun\",\n  \"serviceCategory\": \"wedding\",\n  \"aadharNumber\": \"123412341234\",\n  \"portfolio\": [\n    \"http://example.com/photo.jpg\"\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Add Portfolio Item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/partner/portfolio"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"imageUrl\": \"http://dummy.com/photo1.jpg\",\n  \"description\": \"Wedding shoot in Rishikesh\",\n  \"index\": 1\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Portfolio",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/partner/portfolio"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Inquiry",
+      "item": [
+        {
+          "name": "Create Inquiry (Client)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/inquiry"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"category\": \"wedding\",\n  \"date\": \"2025-06-15\",\n  \"budget\": 25000,\n  \"city\": \"Dehradun\",\n  \"referenceImageUrl\": \"http://example.com/ref.jpg\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Partner Leads",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/inquiry/leads"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Get Pending Verifications",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/admin/verifications"
+            }
+          }
+        },
+        {
+          "name": "Verify Partner",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/admin/verify/:id"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"verified\",\n  \"comment\": \"Approved\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Admin Stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/admin/stats"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
